@@ -47,3 +47,17 @@ def test_string_to_number():
     assert x2 == 20
     x3 = Item.string_to_number("abcd")
     assert x3 == "Exception: Это не число!"
+
+
+def test___repr__():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Мышь", 200, 50)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Мышь', 200, 50)"
+
+
+def test___str__():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Мышь", 200, 50)
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Мышь'
