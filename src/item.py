@@ -33,10 +33,6 @@ class Item:
         else:
             print('Exception: Длина наименования товара превышает 10 символов.')
 
-    @name.getter
-    def name(self):
-        return self.__name
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
