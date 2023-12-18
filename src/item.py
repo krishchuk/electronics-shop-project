@@ -69,3 +69,8 @@ class Item:
             return int(float(num_string))
         else:
             return "Exception: Это не число!"
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        return "Exception: Складываем только объекты классов!"

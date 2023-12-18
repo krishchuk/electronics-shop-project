@@ -1,12 +1,14 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
+
 
 from src.item import Item
+from src.phone import Phone
 
 
 def test_calculate_total_price():
     ex1 = Item("Яблоко", 5, 100)
     assert ex1.price * ex1.quantity == 500
+    assert ex1.calculate_total_price() == 500
 
 
 def test_apply_discount():
@@ -61,3 +63,13 @@ def test___str__():
     item2 = Item("Мышь", 200, 50)
     assert str(item1) == 'Смартфон'
     assert str(item2) == 'Мышь'
+
+
+def test___add__():
+    item1 = Item("Смартфон", 10000, 40)
+    item2 = Item("Кнопочный телефон", 200, 10)
+    phone1 = Phone("Samsung", 10000, 20, 2)
+    assert item1 + item2 == 50
+    assert item2 + phone1 == 30
+    assert item1 + 10 == "Exception: Складываем только объекты классов!"
+    assert phone1 + "100" == "Exception: Складываем только объекты классов!"
