@@ -71,6 +71,7 @@ class Item:
             return "Exception: Это не число!"
 
     def __add__(self, other):
-        if isinstance(other, self.__class__):
-            return self.quantity + other.quantity
-        return "Exception: Складываем только объекты классов!"
+        if issubclass(self.__class__, Item):
+            if isinstance(other, self.__class__):
+                return self.quantity + other.quantity
+        raise ValueError('Складываем только экземпляры классов Phone или Item!')

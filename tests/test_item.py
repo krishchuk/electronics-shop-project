@@ -1,5 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
+import pytest
 
 from src.item import Item
 from src.phone import Phone
@@ -71,5 +71,15 @@ def test___add__():
     phone1 = Phone("Samsung", 10000, 20, 2)
     assert item1 + item2 == 50
     assert item2 + phone1 == 30
-    assert item1 + 10 == "Exception: Складываем только объекты классов!"
-    assert phone1 + "100" == "Exception: Складываем только объекты классов!"
+
+
+def test___add___error_item():
+    item1 = Item("Смартфон", 10000, 40)
+    with pytest.raises(ValueError, match="Складываем только экземпляры классов Phone или Item!"):
+        result = item1 + 10
+
+
+def test___add___error_phone():
+    phone1 = Phone("Samsung", 10000, 20, 2)
+    with pytest.raises(ValueError, match="Складываем только экземпляры классов Phone или Item!"):
+        result = phone1 + "100"
