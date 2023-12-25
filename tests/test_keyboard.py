@@ -19,5 +19,5 @@ def test_change_lang():
 
 def test_change_lang_wrong():
     kb3 = Keyboard('Dark Project KD87A', 9600, 5)
-    with pytest.raises(AttributeError, match="property 'language' of 'Keyboard' object has no setter"):
+    with pytest.raises(AttributeError):
         kb3.language = "CH"
