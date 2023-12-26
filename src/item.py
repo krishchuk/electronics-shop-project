@@ -55,13 +55,21 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, file):
-        parents_path = Path(__file__).parent.parent
-        file_path = Path(parents_path, file)
-        with open(file_path) as f:
-            items = csv.DictReader(f)
-            cls.all = []
-            for item in items:
-                item_ex = Item(item['name'], item['price'], item['quantity'])
+        try:
+            parents_path = Path(__file__).parent.parent
+            file_path = Path(parents_path, file)
+            with open(file_path) as f:
+                items = csv.DictReader(f)
+                cls.all = []
+                for item in items:
+                    if 'name' not in item or 'price' not in item or 'quantity' not in item:
+                        print('\nФайл поврежден, выбрасываю исключение')
+                        raise InstantiateCSVError()
+                    item_ex = Item(item['name'], item['price'], item['quantity'])
+        except FileNotFoundError:
+            print(f'FileNotFoundError: Отсутствует файл {file}')
+        except InstantiateCSVError:
+            print(f'InstantiateCSVError: Файл {file} поврежден')
 
     @staticmethod
     def string_to_number(num_string):
@@ -75,3 +83,7 @@ class Item:
             if isinstance(other, self.__class__):
                 return self.quantity + other.quantity
         raise ValueError('Складываем только экземпляры классов Phone или Item!')
+
+
+class InstantiateCSVError(Exception):
+    pass

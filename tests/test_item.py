@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -83,3 +83,8 @@ def test___add___error_phone():
     phone1 = Phone("Samsung", 10000, 20, 2)
     with pytest.raises(ValueError, match="Складываем только экземпляры классов Phone или Item!"):
         result = phone1 + "100"
+
+
+def test_exception_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('src/items.csv')
