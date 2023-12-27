@@ -62,14 +62,11 @@ class Item:
                 items = csv.DictReader(f)
                 cls.all = []
                 for item in items:
-                    if 'name' not in item or 'price' not in item or 'quantity' not in item:
-                        print('\nФайл поврежден, выбрасываю исключение')
-                        raise InstantiateCSVError()
                     item_ex = Item(item['name'], item['price'], item['quantity'])
+        except (ValueError, KeyError):
+            raise InstantiateCSVError(f'Файл {file} поврежден')
         except FileNotFoundError:
             print(f'FileNotFoundError: Отсутствует файл {file}')
-        except InstantiateCSVError:
-            print(f'InstantiateCSVError: Файл {file} поврежден')
 
     @staticmethod
     def string_to_number(num_string):
