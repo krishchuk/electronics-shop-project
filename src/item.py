@@ -66,7 +66,8 @@ class Item:
         except (ValueError, KeyError):
             raise InstantiateCSVError(f'Файл {file} поврежден')
         except FileNotFoundError:
-            print(f'FileNotFoundError: Отсутствует файл {file}')
+            raise FileNotFoundError(f'Отсутствует файл {file}')
+            # print(f'FileNotFoundError: Отсутствует файл {file}')
 
     @staticmethod
     def string_to_number(num_string):

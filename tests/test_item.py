@@ -85,6 +85,11 @@ def test___add___error_phone():
         result = phone1 + "100"
 
 
-def test_exception_error():
+def test_instantiate_csv_error():
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv('src/items.csv')
+
+
+def test_file_not_found_error():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('src/item.csv')
